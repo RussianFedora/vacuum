@@ -1,7 +1,7 @@
 Summary:	Client application for the Jabber network
 Name:		vacuum
 Version:	1.1.0
-Release:	1%{dist}
+Release:	2%{dist}
 
 License:	GPLv3
 Group:		Applications/Internet
@@ -13,7 +13,9 @@ BuildRequires:	qt-devel
 BuildRequires:	openssl-devel
 BuildRequires:	qca2-devel
 BuildRequires:	libXScrnSaver-devel
+%if 0%{?fedora} >= 14
 BuildRequires:	qt-webkit-devel
+%endif
 
 Requires:	qca2-ossl
 
@@ -58,5 +60,8 @@ rm -f %{buildroot}/%{_libdir}/libvacuumutils.so
 
 
 %changelog
+* Tue Mar 22 2011 Arkady L. Shane <ashejn@yandex-team.ru> - 1.1.0-2
+- qt-webkit-devel only for fedora >= 14
+
 * Mon Mar 21 2011 Arkady L. Shane <ashejn@yandex-team.ru> - 1.1.0-1
 - initial build for Fedora 
