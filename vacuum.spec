@@ -1,7 +1,7 @@
 Summary:	Client application for the Jabber network
 Name:		vacuum
 Version:	1.1.0
-Release:	4%{dist}
+Release:	4%{dist}.R
 
 License:	GPLv3
 Group:		Applications/Internet
@@ -102,7 +102,7 @@ gtk-update-icon-cache /usr/share/icons/hicolor &>/dev/null || :
 
 
 %changelog
-* Fri Apr 22 2011 Arkady L. Shane <ashejn@yandex-team.ru> - 1.1.0-4
+* Fri Apr 22 2011 Arkady L. Shane <ashejn@yandex-team.ru> - 1.1.0-4.R
 - use system libs (qtlockedfile, minizip, idn)
 
 * Tue Mar 22 2011 Arkady L. Shane <ashejn@yandex-team.ru> - 1.1.0-3
