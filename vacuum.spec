@@ -1,12 +1,13 @@
 Summary:	Client application for the Jabber network
 Name:		vacuum
 Version:	1.1.0
-Release:	3%{dist}
+Release:	4%{dist}
 
 License:	GPLv3
 Group:		Applications/Internet
 URL:		http://code.google.com/p/vacuum-im/
 Source0:	http://vacuum-im.googlecode.com/files/%{name}-%{version}.tar.gz
+Patch1:		vacuum-1.1.0-system-libs.patch
 
 BuildRequires:	zlib-devel 
 BuildRequires:	qt-devel 
@@ -40,6 +41,7 @@ developing %{name}.
 
 %prep
 %setup -q
+%patch1 -p0 -b .system-libs
 
 
 %build
@@ -100,6 +102,9 @@ gtk-update-icon-cache /usr/share/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Fri Apr 22 2011 Arkady L. Shane <ashejn@yandex-team.ru> - 1.1.0-4
+- use system libs (qtlockedfile, minizip, idn)
+
 * Tue Mar 22 2011 Arkady L. Shane <ashejn@yandex-team.ru> - 1.1.0-3
 - build via cmake with devel package
 - place icons also in /usr/share/icons
