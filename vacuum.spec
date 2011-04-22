@@ -1,7 +1,7 @@
 Summary:	Client application for the Jabber network
 Name:		vacuum
 Version:	1.1.0
-Release:	4%{dist}.R
+Release:	5%{dist}.R
 
 License:	GPLv3
 Group:		Applications/Internet
@@ -18,6 +18,10 @@ BuildRequires:	libXScrnSaver-devel
 BuildRequires:	qt-webkit-devel
 %endif
 BuildRequires:	cmake
+
+BuildRequires:	libidn-devel
+BuildRequires:	minizip-devel
+BuildRequires:	qtlockedfile-devel
 
 Requires:	qca2-ossl
 
@@ -102,6 +106,9 @@ gtk-update-icon-cache /usr/share/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Fri Apr 22 2011 Arkady L. Shane <ashejn@yandex-team.ru> - 1.1.0-5.R
+- added BR: libidn-devel minizip-devel qtlockedfile-devel
+
 * Fri Apr 22 2011 Arkady L. Shane <ashejn@yandex-team.ru> - 1.1.0-4.R
 - use system libs (qtlockedfile, minizip, idn)
 
