@@ -1,24 +1,21 @@
-Summary:	Client application for the Jabber network
-Name:		vacuum
-Version:	1.1.0
-Release:	5%{dist}.R
+Summary:    Client application for the Jabber network
+Name:       vacuum
+Version:    1.1.1
+Release:    1%{dist}.R
 
-License:	GPLv3
-Group:		Applications/Internet
-URL:		http://code.google.com/p/vacuum-im/
-Source0:	http://vacuum-im.googlecode.com/files/%{name}-%{version}.tar.gz
-Patch1:		vacuum-1.1.0-system-libs.patch
+License:    GPLv3
+Group:      Applications/Internet
+URL:        http://code.google.com/p/vacuum-im/
+Source0:    http://vacuum-im.googlecode.com/files/%{name}-im-%{version}.tar.xz
+
 
 BuildRequires:	zlib-devel 
 BuildRequires:	qt-devel 
 BuildRequires:	openssl-devel
 BuildRequires:	qca2-devel
 BuildRequires:	libXScrnSaver-devel
-%if 0%{?fedora} >= 14
 BuildRequires:	qt-webkit-devel
-%endif
 BuildRequires:	cmake
-
 BuildRequires:	libidn-devel
 BuildRequires:	minizip-devel
 BuildRequires:	qtlockedfile-devel
@@ -44,8 +41,7 @@ developing %{name}.
 
 
 %prep
-%setup -q
-%patch1 -p0 -b .system-libs
+%setup -q -n %{name}-im-%{version}
 
 
 %build
@@ -106,6 +102,10 @@ gtk-update-icon-cache /usr/share/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Thu Aug 25 2011 Vasiliy N. Glazov <vascom2@gmail.com> - 1.1.1-1.R
+- update to 1.1.1
+- drop vacuum-1.1.0-system-libs.patch
+
 * Fri Apr 22 2011 Arkady L. Shane <ashejn@yandex-team.ru> - 1.1.0-5.R
 - added BR: libidn-devel minizip-devel qtlockedfile-devel
 
