@@ -47,8 +47,8 @@ developing %{name}.
 %build
 mkdir build
 cd build
-%{cmake_kde4} .. \
-	-DINSTALL_LIB_DIR=%{_lib}
+%{cmake_kde4} .. 
+	#-DINSTALL_LIB_DIR=%{_lib}
 
 make %{?_smp_mflags}
 cd -
