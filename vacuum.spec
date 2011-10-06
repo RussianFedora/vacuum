@@ -45,10 +45,10 @@ developing %{name}.
 
 
 %build
-qmake-qt4 -recursive vacuum.pro INSTALL_LIB_DIR=%{_lib}
+qmake-qt4 -recursive vacuum.pro
 mkdir build
 cd build
-%{cmake_kde4} ..
+cmake .. -DLIB_INSTALL_DIR=%{_lib}
 
 
 %install
