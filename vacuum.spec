@@ -48,7 +48,11 @@ developing %{name}.
 qmake-qt4 -recursive vacuum.pro
 mkdir build
 cd build
-cmake .. -DLIB_INSTALL_DIR=%{_lib}
+cmake .. \
+    -DBUILD_SHARED_LIBS:BOOL=ON \
+    -DCMAKE_BUILD_TYPE=release \
+    -DCMAKE_INSTALL_PREFIX:PATH=/usr \
+    -DINSTALL_LIB_DIR:PATH=%{_libdir}
 
 
 %install
