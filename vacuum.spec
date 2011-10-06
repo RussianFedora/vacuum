@@ -1,7 +1,7 @@
 Summary:    Client application for the Jabber network
 Name:       vacuum
 Version:    1.1.1
-Release:    1%{dist}.R
+Release:    2%{dist}.R
 
 License:    GPLv3
 Group:      Applications/Internet
@@ -9,18 +9,18 @@ URL:        http://code.google.com/p/vacuum-im/
 Source0:    http://vacuum-im.googlecode.com/files/%{name}-im-%{version}.tar.xz
 
 
-BuildRequires:	zlib-devel 
-BuildRequires:	qt-devel 
-BuildRequires:	openssl-devel
-BuildRequires:	qca2-devel
-BuildRequires:	libXScrnSaver-devel
-BuildRequires:	qt-webkit-devel
-BuildRequires:	cmake
-BuildRequires:	libidn-devel
-BuildRequires:	minizip-devel
-BuildRequires:	qtlockedfile-devel
+BuildRequires:  zlib-devel
+BuildRequires:  qt-devel
+BuildRequires:  openssl-devel
+BuildRequires:  qca2-devel
+BuildRequires:  libXScrnSaver-devel
+BuildRequires:  qt-webkit-devel
+BuildRequires:  cmake
+BuildRequires:  libidn-devel
+BuildRequires:  minizip-devel
+BuildRequires:  qtlockedfile-devel
 
-Requires:	qca2-ossl
+Requires:       qca2-ossl
 
 
 %description
@@ -30,9 +30,9 @@ interaction via interfaces. Supported XMPP extension protocols.
 
 
 %package devel
-Summary:	Static library and header files for the %{name}
-Group:		Development/Libraries
-Requires:	%{name} = %{version}
+Summary:    Static library and header files for the %{name}
+Group:      Development/Libraries
+Requires:   %{name} = %{version}
 
 
 %description devel
@@ -45,25 +45,23 @@ developing %{name}.
 
 
 %build
+qmake-qt4 -recursive vacuum.pro INSTALL_LIB_DIR=%{_lib}
 mkdir build
 cd build
-%{cmake_kde4} .. \
-	-DINSTALL_LIB_DIR=%{_lib}
-
-make %{?_smp_mflags}
-cd -
+%{cmake_kde4} ..
 
 
 %install
+rm -rf %{buildroot}
 make DESTDIR=%{buildroot} install -C build
 
-# remove unversion doc
+#remove unversion doc
 rm -rf %{buildroot}%{_datadir}/doc/%{name}
 
 for size in 16x16 22x22 24x24 32x32 36x36 48x48 96x96 128x128 ; do
-  mkdir -p %{buildroot}%{_datadir}/icons/hicolor/$size/apps
-  install -m644 resources/menuicons/shared/%{name}.png \
-	%{buildroot}%{_datadir}/icons/hicolor/$size/apps/
+    mkdir -p %{buildroot}%{_datadir}/icons/hicolor/$size/apps
+    install -m644 resources/menuicons/shared/%{name}.png \
+    %{buildroot}%{_datadir}/icons/hicolor/$size/apps/
 done
 
 
@@ -102,6 +100,9 @@ gtk-update-icon-cache /usr/share/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Thu Oct 06 2011 Vasiliy N. Glazov <vascom2@gmail.com> - 1.1.1-2.R
+- New build procedure suitable for F16
+
 * Thu Aug 25 2011 Vasiliy N. Glazov <vascom2@gmail.com> - 1.1.1-1.R
 - update to 1.1.1
 - drop vacuum-1.1.0-system-libs.patch
