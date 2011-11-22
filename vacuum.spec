@@ -1,7 +1,8 @@
-Summary:    Client application for the Jabber network
 Name:       vacuum
 Version:    1.1.1
-Release:    2%{dist}.R
+Release:    3%{dist}.R
+Summary:    Client application for the Jabber network
+Summary(ru):Свободный jabber-клиент
 
 License:    GPLv3
 Group:      Applications/Internet
@@ -28,9 +29,17 @@ The core program is just a plugin loader - all functionality is made available
 via plugins. This enforces modularity and ensures well defined component
 interaction via interfaces. Supported XMPP extension protocols.
 
+%description -l ru
+Vacuum IM - это свободный кросплатформенный Jabber-клиент, написанный на Qt4.
+Принципиальное отличие от других кросплатформенных клиентов заключается в
+открытой модульной архитектуре, позволяющей гибко настраивать функциональность
+под конкретные нужды, а также использовать возможности уже имеющихся модулей
+при разработке собственных.
+
 
 %package devel
 Summary:    Static library and header files for the %{name}
+Summary(ru):Статичная библиотека и заголовочные файлы для %{name}
 Group:      Development/Libraries
 Requires:   %{name} = %{version}
 
@@ -38,6 +47,9 @@ Requires:   %{name} = %{version}
 %description devel
 The %{name}-devel package contains API documentation for
 developing %{name}.
+
+%description devel -l ru
+Пакет %{name}-devel содержит документацию и API для %{name}.
 
 
 %prep
@@ -104,6 +116,9 @@ gtk-update-icon-cache /usr/share/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Tue Nov 22 2011 Vasiliy N. Glazov <vascom2@gmail.com> - 1.1.1-3.R
+- Added description in russian language
+
 * Thu Oct 06 2011 Vasiliy N. Glazov <vascom2@gmail.com> - 1.1.1-2.R
 - New build procedure suitable for F16
 
