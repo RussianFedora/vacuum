@@ -1,6 +1,6 @@
-Name:       vacuum
+Name:      vacuum
 Version:    1.1.1
-Release:    3%{dist}.R
+Release:    4%{dist}.R
 Summary:    Client application for the Jabber network
 Summary(ru):Свободный jabber-клиент
 
@@ -21,7 +21,7 @@ BuildRequires:  libidn-devel
 BuildRequires:  minizip-devel
 BuildRequires:  qtlockedfile-devel
 
-Requires:       qca2-ossl
+Requires:      qca2-ossl
 
 
 %description
@@ -41,7 +41,7 @@ Vacuum IM - это свободный кросплатформенный Jabber-
 Summary:    Static library and header files for the %{name}
 Summary(ru):Статичная библиотека и заголовочные файлы для %{name}
 Group:      Development/Libraries
-Requires:   %{name} = %{version}
+Requires:  %{name} = %{version}
 
 
 %description devel
@@ -57,28 +57,29 @@ developing %{name}.
 
 
 %build
-qmake-qt4 -recursive vacuum.pro
 mkdir build
 cd build
-cmake .. \
-    -DBUILD_SHARED_LIBS:BOOL=ON \
-    -DCMAKE_BUILD_TYPE=release \
-    -DCMAKE_INSTALL_PREFIX:PATH=/usr \
-    -DINSTALL_LIB_DIR:PATH=%{_libdir}
+%{cmake} .. -DINSTALL_LIB_DIR=%{_libdir}
+make %{?_smp_mflags}
 
 
 %install
 rm -rf %{buildroot}
-make DESTDIR=%{buildroot} install -C build
+cd build
+make DESTDIR=%{buildroot} install
+
 
 #remove unversion doc
 rm -rf %{buildroot}%{_datadir}/doc/%{name}
 
-for size in 16x16 22x22 24x24 32x32 36x36 48x48 96x96 128x128 ; do
-    mkdir -p %{buildroot}%{_datadir}/icons/hicolor/$size/apps
-    install -m644 resources/menuicons/shared/%{name}.png \
-    %{buildroot}%{_datadir}/icons/hicolor/$size/apps/
-done
+install -D -m644 %{buildroot}%{_datadir}/%{name}/resources/menuicons/shared/mainwindowlogo128.png %{buildroot}%{_datadir}/icons/hicolor/128x128/apps/%{name}.png
+install -D -m644 %{buildroot}%{_datadir}/%{name}/resources/menuicons/shared/mainwindowlogo96.png %{buildroot}%{_datadir}/icons/hicolor/96x96/apps/%{name}.png
+install -D -m644 %{buildroot}%{_datadir}/%{name}/resources/menuicons/shared/mainwindowlogo64.png %{buildroot}%{_datadir}/icons/hicolor/64x64/apps/%{name}.png
+install -D -m644 %{buildroot}%{_datadir}/%{name}/resources/menuicons/shared/mainwindowlogo48.png %{buildroot}%{_datadir}/icons/hicolor/48x48/apps/%{name}.png
+install -D -m644 %{buildroot}%{_datadir}/%{name}/resources/menuicons/shared/mainwindowlogo32.png %{buildroot}%{_datadir}/icons/hicolor/32x32/apps/%{name}.png
+install -D -m644 %{buildroot}%{_datadir}/%{name}/resources/menuicons/shared/mainwindowlogo24.png %{buildroot}%{_datadir}/icons/hicolor/24x24/apps/%{name}.png
+install -D -m644 %{buildroot}%{_datadir}/%{name}/resources/menuicons/shared/mainwindowlogo16.png %{buildroot}%{_datadir}/icons/hicolor/16x16/apps/%{name}.png
+
 
 
 %post
@@ -102,7 +103,7 @@ gtk-update-icon-cache /usr/share/icons/hicolor &>/dev/null || :
 %doc COPYING CHANGELOG AUTHORS README TRANSLATORS
 %{_bindir}/%{name}
 %{_libdir}/%{name}/plugins
-%{_libdir}/*.so.*
+%{_libdir}/*.so*
 %{_datadir}/%{name}
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/pixmaps/%{name}.png
@@ -112,10 +113,12 @@ gtk-update-icon-cache /usr/share/icons/hicolor &>/dev/null || :
 %files devel
 %defattr(-, root, root, 0755)
 %{_includedir}/%{name}
-%{_libdir}/*.so
 
 
 %changelog
+* Tue Dec 06 2011 Vasiliy N. Glazov <vascom2@gmail.com> - 1.1.1-4.R
+- Updated for work in F16
+
 * Tue Nov 22 2011 Vasiliy N. Glazov <vascom2@gmail.com> - 1.1.1-3.R
 - Added description in russian language
 
@@ -140,4 +143,4 @@ gtk-update-icon-cache /usr/share/icons/hicolor &>/dev/null || :
 - qt-webkit-devel only for fedora >= 14
 
 * Mon Mar 21 2011 Arkady L. Shane <ashejn@yandex-team.ru> - 1.1.0-1
-- initial build for Fedora 
+- initial build for Fedora
