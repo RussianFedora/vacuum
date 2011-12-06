@@ -1,6 +1,6 @@
 Name:      vacuum
 Version:    1.1.1
-Release:    3%{dist}.R
+Release:    4%{dist}.R
 Summary:    Client application for the Jabber network
 Summary(ru):Свободный jabber-клиент
 
