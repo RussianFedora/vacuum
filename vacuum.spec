@@ -1,13 +1,13 @@
 Name:      vacuum
 Version:    1.1.1
-Release:    4%{dist}.R
+Release:    3%{dist}.R
 Summary:    Client application for the Jabber network
 Summary(ru):Свободный jabber-клиент
 
 License:    GPLv3
 Group:      Applications/Internet
 URL:        http://code.google.com/p/vacuum-im/
-Source0:    http://vacuum-im.googlecode.com/files/%{name}-im-%{version}.tar.xz
+Source0:    http://vacuum-im.googlecode.com/files/%{name}-%{version}.tar.xz
 
 
 BuildRequires:  zlib-devel
@@ -53,13 +53,15 @@ developing %{name}.
 
 
 %prep
-%setup -q -n %{name}-im-%{version}
+%setup -q -n %{name}-%{version}
 
 
 %build
 mkdir build
 cd build
-%{cmake} .. -DINSTALL_LIB_DIR=%{_libdir}
+cmake .. -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+         -DCMAKE_INSTALL_PREFIX=/usr \
+         -DINSTALL_LIB_DIR=%{_lib}
 make %{?_smp_mflags}
 
 
@@ -67,18 +69,20 @@ make %{?_smp_mflags}
 rm -rf %{buildroot}
 cd build
 make DESTDIR=%{buildroot} install
+#remove broken plugin
+rm %{buildroot}%{_libdir}/%{name}/plugins/libbirthdayreminder.so
 
 
 #remove unversion doc
 rm -rf %{buildroot}%{_datadir}/doc/%{name}
 
-install -D -m644 %{buildroot}%{_datadir}/%{name}/resources/menuicons/shared/mainwindowlogo128.png %{buildroot}%{_datadir}/icons/hicolor/128x128/apps/%{name}.png
-install -D -m644 %{buildroot}%{_datadir}/%{name}/resources/menuicons/shared/mainwindowlogo96.png %{buildroot}%{_datadir}/icons/hicolor/96x96/apps/%{name}.png
-install -D -m644 %{buildroot}%{_datadir}/%{name}/resources/menuicons/shared/mainwindowlogo64.png %{buildroot}%{_datadir}/icons/hicolor/64x64/apps/%{name}.png
-install -D -m644 %{buildroot}%{_datadir}/%{name}/resources/menuicons/shared/mainwindowlogo48.png %{buildroot}%{_datadir}/icons/hicolor/48x48/apps/%{name}.png
-install -D -m644 %{buildroot}%{_datadir}/%{name}/resources/menuicons/shared/mainwindowlogo32.png %{buildroot}%{_datadir}/icons/hicolor/32x32/apps/%{name}.png
-install -D -m644 %{buildroot}%{_datadir}/%{name}/resources/menuicons/shared/mainwindowlogo24.png %{buildroot}%{_datadir}/icons/hicolor/24x24/apps/%{name}.png
-install -D -m644 %{buildroot}%{_datadir}/%{name}/resources/menuicons/shared/mainwindowlogo16.png %{buildroot}%{_datadir}/icons/hicolor/16x16/apps/%{name}.png
+install -D -m644 %{buildroot}%{_datadir}/%{name}/resources/menuicons/shared/mainwindowlogo128.png %{buildroot}%{_datadir}/icons/hicolor/128x128/apps/%{name}.png 
+install -D -m644 %{buildroot}%{_datadir}/%{name}/resources/menuicons/shared/mainwindowlogo96.png %{buildroot}%{_datadir}/icons/hicolor/96x96/apps/%{name}.png 
+install -D -m644 %{buildroot}%{_datadir}/%{name}/resources/menuicons/shared/mainwindowlogo64.png %{buildroot}%{_datadir}/icons/hicolor/64x64/apps/%{name}.png 
+install -D -m644 %{buildroot}%{_datadir}/%{name}/resources/menuicons/shared/mainwindowlogo48.png %{buildroot}%{_datadir}/icons/hicolor/48x48/apps/%{name}.png 
+install -D -m644 %{buildroot}%{_datadir}/%{name}/resources/menuicons/shared/mainwindowlogo32.png %{buildroot}%{_datadir}/icons/hicolor/32x32/apps/%{name}.png 
+install -D -m644 %{buildroot}%{_datadir}/%{name}/resources/menuicons/shared/mainwindowlogo24.png %{buildroot}%{_datadir}/icons/hicolor/24x24/apps/%{name}.png 
+install -D -m644 %{buildroot}%{_datadir}/%{name}/resources/menuicons/shared/mainwindowlogo16.png %{buildroot}%{_datadir}/icons/hicolor/16x16/apps/%{name}.png 
 
 
 
@@ -116,8 +120,8 @@ gtk-update-icon-cache /usr/share/icons/hicolor &>/dev/null || :
 
 
 %changelog
-* Tue Dec 06 2011 Vasiliy N. Glazov <vascom2@gmail.com> - 1.1.1-4.R
-- Updated for work in F16
+* Tue Dec 6 2011 Alexey N. Ivanov <vascom2@gmail.com> - 1.1.1-4.R
+- Fixed work, removed broken plugin.
 
 * Tue Nov 22 2011 Vasiliy N. Glazov <vascom2@gmail.com> - 1.1.1-3.R
 - Added description in russian language
@@ -143,4 +147,5 @@ gtk-update-icon-cache /usr/share/icons/hicolor &>/dev/null || :
 - qt-webkit-devel only for fedora >= 14
 
 * Mon Mar 21 2011 Arkady L. Shane <ashejn@yandex-team.ru> - 1.1.0-1
-- initial build for Fedora
+- initial build for Fedora 
+
