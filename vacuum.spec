@@ -1,3 +1,5 @@
+%define cmake_build_dir build
+
 Name:      vacuum
 Version:    1.1.1
 Release:    4%{dist}.R
@@ -54,21 +56,20 @@ developing %{name}.
 
 %prep
 %setup -q -n %{name}-%{version}
-
+mkdir %{cmake_build_dir}
+pushd %{cmake_build_dir}
+      %cmake .. -DINSTALL_LIB_DIR=%{_lib} -DCFLAGS="%{optflags}" -DCXXFLAGS="%{optflags}"
+popd
 
 %build
-mkdir build
-cd build
-cmake .. -DCMAKE_BUILD_TYPE=RelWithDebInfo \
-         -DCMAKE_INSTALL_PREFIX=/usr \
-         -DINSTALL_LIB_DIR=%{_lib}
-make %{?_smp_mflags}
-
+pushd %{cmake_build_dir}
+      make %{?_smp_mflags}
+popd
 
 %install
-rm -rf %{buildroot}
-cd build
-make DESTDIR=%{buildroot} install
+pushd %{cmake_build_dir}
+      make install DESTDIR=$RPM_BUILD_ROOT
+popd
 
 
 #remove unversion doc
@@ -105,7 +106,7 @@ gtk-update-icon-cache /usr/share/icons/hicolor &>/dev/null || :
 %doc COPYING CHANGELOG AUTHORS README TRANSLATORS
 %{_bindir}/%{name}
 %{_libdir}/%{name}/plugins
-%{_libdir}/*.so*
+%{_libdir}/*.so.*
 %{_datadir}/%{name}
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/pixmaps/%{name}.png
@@ -115,10 +116,11 @@ gtk-update-icon-cache /usr/share/icons/hicolor &>/dev/null || :
 %files devel
 %defattr(-, root, root, 0755)
 %{_includedir}/%{name}
+%{_libdir}/*.so
 
 
 %changelog
-* Tue Dec 6 2011 Alexey N. Ivanov <alexey.ivanes@gmail.com> - 1.1.1-4.R
+* Tue Dec 7 2011 Alexey N. Ivanov <alexey.ivanes@gmail.com> - 1.1.1-4.R
 - Fixed work.
 
 * Tue Nov 22 2011 Vasiliy N. Glazov <vascom2@gmail.com> - 1.1.1-3.R
