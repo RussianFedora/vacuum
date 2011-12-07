@@ -118,7 +118,7 @@ gtk-update-icon-cache /usr/share/icons/hicolor &>/dev/null || :
 
 
 %changelog
-* Tue Dec 6 2011 Alexey N. Ivanov <vascom2@gmail.com> - 1.1.1-4.R
+* Tue Dec 6 2011 Alexey N. Ivanov <alexey.ivanes@gmail.com> - 1.1.1-4.R
 - Fixed work, removed broken plugin.
 
 * Tue Nov 22 2011 Vasiliy N. Glazov <vascom2@gmail.com> - 1.1.1-3.R
