@@ -69,8 +69,6 @@ make %{?_smp_mflags}
 rm -rf %{buildroot}
 cd build
 make DESTDIR=%{buildroot} install
-#remove broken plugin
-rm %{buildroot}%{_libdir}/%{name}/plugins/libbirthdayreminder.so
 
 
 #remove unversion doc
