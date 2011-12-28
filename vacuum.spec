@@ -1,8 +1,8 @@
 %define cmake_build_dir build
 
 Name:      vacuum
-Version:    1.1.1
-Release:    4%{dist}.R
+Version:    1.1.2
+Release:    5%{dist}.R
 Summary:    Client application for the Jabber network
 Summary(ru):Свободный jabber-клиент
 
@@ -120,6 +120,9 @@ gtk-update-icon-cache /usr/share/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Tue Dec 28 2011 Alexey N. Ivanov <alexey.ivanes@gmail.com> - 1.1.1-5.R
+- Minor version update.
+
 * Tue Dec 7 2011 Alexey N. Ivanov <alexey.ivanes@gmail.com> - 1.1.1-4.R
 - Fixed work.
 
