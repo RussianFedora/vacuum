@@ -1,16 +1,15 @@
 %define cmake_build_dir build
 
-Name:      vacuum
-Version:    1.1.2
-Release:    5%{dist}.R
-Summary:    Client application for the Jabber network
-Summary(ru):Свободный jabber-клиент
+Name:            vacuum
+Version:         1.2.0
+Release:         1%{dist}.R
+Summary:      Client application for the Jabber network
+Summary(ru): Свободный jabber-клиент
 
-License:    GPLv3
-Group:      Applications/Internet
-URL:        http://code.google.com/p/vacuum-im/
+License:     GPLv3
+Group:       Applications/Internet
+URL:           http://code.google.com/p/vacuum-im/
 Source0:    http://vacuum-im.googlecode.com/files/%{name}-%{version}.tar.xz
-
 
 BuildRequires:  zlib-devel
 BuildRequires:  qt-devel
@@ -23,8 +22,7 @@ BuildRequires:  libidn-devel
 BuildRequires:  minizip-devel
 BuildRequires:  qtlockedfile-devel
 
-Requires:      qca2-ossl
-
+Requires:           qca2-ossl
 
 %description
 The core program is just a plugin loader - all functionality is made available
@@ -38,21 +36,17 @@ Vacuum IM - это свободный кросплатформенный Jabber-
 под конкретные нужды, а также использовать возможности уже имеющихся модулей
 при разработке собственных.
 
-
 %package devel
-Summary:    Static library and header files for the %{name}
-Summary(ru):Статичная библиотека и заголовочные файлы для %{name}
-Group:      Development/Libraries
-Requires:  %{name} = %{version}
-
+Summary:      Static library and header files for the %{name}
+Summary(ru): Статичная библиотека и заголовочные файлы для %{name}
+Group:           Development/Libraries
+Requires:      %{name} = %{version}
 
 %description devel
-The %{name}-devel package contains API documentation for
-developing %{name}.
+The %{name}-devel package contains API documentation for developing %{name}.
 
 %description devel -l ru
 Пакет %{name}-devel содержит документацию и API для %{name}.
-
 
 %prep
 %setup -q -n %{name}-%{version}
@@ -71,7 +65,6 @@ pushd %{cmake_build_dir}
       make install DESTDIR=$RPM_BUILD_ROOT
 popd
 
-
 #remove unversion doc
 rm -rf %{buildroot}%{_datadir}/doc/%{name}
 
@@ -83,12 +76,9 @@ install -D -m644 %{buildroot}%{_datadir}/%{name}/resources/menuicons/shared/main
 install -D -m644 %{buildroot}%{_datadir}/%{name}/resources/menuicons/shared/mainwindowlogo24.png %{buildroot}%{_datadir}/icons/hicolor/24x24/apps/%{name}.png 
 install -D -m644 %{buildroot}%{_datadir}/%{name}/resources/menuicons/shared/mainwindowlogo16.png %{buildroot}%{_datadir}/icons/hicolor/16x16/apps/%{name}.png 
 
-
-
 %post
 /sbin/ldconfig
 touch --no-create /usr/share/icons/hicolor &>/dev/null || :
-
 
 %postun
 /sbin/ldconfig
@@ -99,7 +89,6 @@ fi
 
 %posttrans
 gtk-update-icon-cache /usr/share/icons/hicolor &>/dev/null || :
-
 
 %files
 %defattr(-, root, root, 0755)
@@ -112,14 +101,15 @@ gtk-update-icon-cache /usr/share/icons/hicolor &>/dev/null || :
 %{_datadir}/pixmaps/%{name}.png
 %{_datadir}/icons/hicolor/*/apps/*.png
 
-
 %files devel
 %defattr(-, root, root, 0755)
 %{_includedir}/%{name}
 %{_libdir}/*.so
 
-
 %changelog
+* Wed Aug 01 2012 Alexey N. Ivanov <alexey.ivanes@gmail.com> - 1.2.0-1.R
+- 1.2.0 stable release.
+
 * Tue Dec 28 2011 Alexey N. Ivanov <alexey.ivanes@gmail.com> - 1.1.1-5.R
 - Minor version update.
 
