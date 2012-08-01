@@ -1,28 +1,28 @@
 %define cmake_build_dir build
 
-Name:            vacuum
-Version:         1.2.0
-Release:         1%{dist}.R
-Summary:      Client application for the Jabber network
-Summary(ru): Свободный jabber-клиент
+Name:             vacuum
+Version:          1.2.0
+Release:          2%{dist}
+Summary:          Client application for the Jabber network
+Summary(ru):      Свободный jabber-клиент
 
-License:     GPLv3
-Group:       Applications/Internet
-URL:           http://code.google.com/p/vacuum-im/
-Source0:    http://vacuum-im.googlecode.com/files/%{name}-%{version}.tar.xz
+License:          GPLv3
+Group:            Applications/Internet
+URL:              http://code.google.com/p/vacuum-im/
+Source0:          http://vacuum-im.googlecode.com/files/%{name}-%{version}.tar.xz
 
-BuildRequires:  zlib-devel
-BuildRequires:  qt-devel
-BuildRequires:  openssl-devel
-BuildRequires:  qca2-devel
-BuildRequires:  libXScrnSaver-devel
-BuildRequires:  qt-webkit-devel
-BuildRequires:  cmake
-BuildRequires:  libidn-devel
-BuildRequires:  minizip-devel
-BuildRequires:  qtlockedfile-devel
+BuildRequires:    zlib-devel
+BuildRequires:    qt-devel
+BuildRequires:    openssl-devel
+BuildRequires:    qca2-devel
+BuildRequires:    libXScrnSaver-devel
+BuildRequires:    qt-webkit-devel
+BuildRequires:    cmake
+BuildRequires:    libidn-devel
+BuildRequires:    minizip-devel
+BuildRequires:    qtlockedfile-devel
 
-Requires:           qca2-ossl
+Requires:         qca2-ossl
 
 %description
 The core program is just a plugin loader - all functionality is made available
@@ -37,10 +37,10 @@ Vacuum IM - это свободный кросплатформенный Jabber-
 при разработке собственных.
 
 %package devel
-Summary:      Static library and header files for the %{name}
-Summary(ru): Статичная библиотека и заголовочные файлы для %{name}
-Group:           Development/Libraries
-Requires:      %{name} = %{version}
+Summary:          Static library and header files for the %{name}
+Summary(ru):      Статичная библиотека и заголовочные файлы для %{name}
+Group:            Development/Libraries
+Requires:         %{name} = %{version}
 
 %description devel
 The %{name}-devel package contains API documentation for developing %{name}.
@@ -107,6 +107,9 @@ gtk-update-icon-cache /usr/share/icons/hicolor &>/dev/null || :
 %{_libdir}/*.so
 
 %changelog
+* Wed Aug 01 2012 Alexey N. Ivanov <alexey.ivanes@gmail.com> - 1.2.0-2
+- Fix package naming.
+
 * Wed Aug 01 2012 Alexey N. Ivanov <alexey.ivanes@gmail.com> - 1.2.0-1.R
 - 1.2.0 stable release.
 
