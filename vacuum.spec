@@ -1,8 +1,8 @@
 %define cmake_build_dir build
 
 Name:             vacuum
-Version:          1.2.0
-Release:          2%{dist}
+Version:          1.2.1
+Release:          1%{dist}
 Summary:          Client application for the Jabber network
 Summary(ru):      Свободный jabber-клиент
 
@@ -11,18 +11,15 @@ Group:            Applications/Internet
 URL:              http://code.google.com/p/vacuum-im/
 Source0:          http://vacuum-im.googlecode.com/files/%{name}-%{version}.tar.xz
 
-BuildRequires:    zlib-devel
-BuildRequires:    qt-devel
-BuildRequires:    openssl-devel
-BuildRequires:    qca2-devel
-BuildRequires:    libXScrnSaver-devel
-BuildRequires:    qt-webkit-devel
 BuildRequires:    cmake
 BuildRequires:    libidn-devel
+BuildRequires:    libXScrnSaver-devel
 BuildRequires:    minizip-devel
+BuildRequires:    openssl-devel
+BuildRequires:    qt-devel
+BuildRequires:    qt-webkit-devel
 BuildRequires:    qtlockedfile-devel
-
-Requires:         qca2-ossl
+BuildRequires:    zlib-devel
 
 %description
 The core program is just a plugin loader - all functionality is made available
@@ -30,15 +27,15 @@ via plugins. This enforces modularity and ensures well defined component
 interaction via interfaces. Supported XMPP extension protocols.
 
 %description -l ru
-Vacuum IM - это свободный кросплатформенный Jabber-клиент, написанный на Qt4.
+Vacuum-IM - это свободный кросплатформенный Jabber-клиент, написанный на Qt4.
 Принципиальное отличие от других кросплатформенных клиентов заключается в
 открытой модульной архитектуре, позволяющей гибко настраивать функциональность
 под конкретные нужды, а также использовать возможности уже имеющихся модулей
 при разработке собственных.
 
 %package devel
-Summary:          Static library and header files for the %{name}
-Summary(ru):      Статичная библиотека и заголовочные файлы для %{name}
+Summary:          Shared library and header files for the %{name}
+Summary(ru):      Разделяемая библиотека и заголовочные файлы для %{name}
 Group:            Development/Libraries
 Requires:         %{name} = %{version}
 
@@ -95,7 +92,7 @@ gtk-update-icon-cache /usr/share/icons/hicolor &>/dev/null || :
 %doc COPYING CHANGELOG AUTHORS README TRANSLATORS
 %{_bindir}/%{name}
 %{_libdir}/%{name}/plugins
-%{_libdir}/*.so.*
+%{_libdir}/libvacuumutils.so.*
 %{_datadir}/%{name}
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/pixmaps/%{name}.png
@@ -104,9 +101,12 @@ gtk-update-icon-cache /usr/share/icons/hicolor &>/dev/null || :
 %files devel
 %defattr(-, root, root, 0755)
 %{_includedir}/%{name}
-%{_libdir}/*.so
+%{_libdir}/libvacuumutils.so
 
 %changelog
+* Tue Jun 15 2013 Alexey N. Ivanov <alexey.ivanes@gmail.com> - 1.2.1-1
+- 1.2.1 stable release.
+
 * Wed Aug 01 2012 Alexey N. Ivanov <alexey.ivanes@gmail.com> - 1.2.0-2
 - Fix package naming.
 
