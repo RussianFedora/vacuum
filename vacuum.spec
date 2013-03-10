@@ -107,7 +107,7 @@ gtk-update-icon-cache /usr/share/icons/hicolor &>/dev/null || :
 * Sun Mar 10 2013 Alexey N. Ivanov <alexey.ivanes@gmail.com> - 1.2.2-1
 - 1.2.2 stable release.
 
-* Tue Jun 15 2013 Alexey N. Ivanov <alexey.ivanes@gmail.com> - 1.2.1-1
+* Tue Jan 15 2013 Alexey N. Ivanov <alexey.ivanes@gmail.com> - 1.2.1-1
 - 1.2.1 stable release.
 
 * Wed Aug 01 2012 Alexey N. Ivanov <alexey.ivanes@gmail.com> - 1.2.0-2
