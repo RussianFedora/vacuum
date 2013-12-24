@@ -104,7 +104,7 @@ gtk-update-icon-cache /usr/share/icons/hicolor &>/dev/null || :
 %{_libdir}/libvacuumutils.so
 
 %changelog
-* Tue Dec 24 Alexey N. Ivanov <alexey.ivanes@gmail.com> - 1.2.3-1
+* Tue Dec 24 2013 Alexey N. Ivanov <alexey.ivanes@gmail.com> - 1.2.3-1
 - 1.2.3 stable release.
 
 * Sun Mar 10 2013 Alexey N. Ivanov <alexey.ivanes@gmail.com> - 1.2.2-1
