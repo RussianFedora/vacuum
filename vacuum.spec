@@ -1,7 +1,7 @@
 %define cmake_build_dir build
 
 Name:             vacuum
-Version:          1.2.3
+Version:          1.2.4
 Release:          1%{dist}
 Summary:          Client application for the Jabber network
 Summary(ru):      Свободный jabber-клиент
@@ -9,7 +9,7 @@ Summary(ru):      Свободный jabber-клиент
 License:          GPLv3
 Group:            Applications/Internet
 URL:              http://code.google.com/p/vacuum-im/
-Source0:          http://vacuum-im.googlecode.com/files/%{name}-%{version}.tar.xz
+Source0:          https://googledrive.com/host/0B7A5K_290X8-NE5nLUx5Yl9BTkk/%{name}-%{version}.tar.xz
 
 BuildRequires:    cmake
 BuildRequires:    libidn-devel
@@ -104,6 +104,9 @@ gtk-update-icon-cache /usr/share/icons/hicolor &>/dev/null || :
 %{_libdir}/libvacuumutils.so
 
 %changelog
+* Sun Mar 30 2014 Alexey N. Ivanov <alexey.ivanes@gmail.com> - 1.2.4-1
+- 1.2.4 stable release.
+
 * Tue Dec 24 2013 Alexey N. Ivanov <alexey.ivanes@gmail.com> - 1.2.3-1
 - 1.2.3 stable release.
 
