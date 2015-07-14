@@ -1,16 +1,17 @@
 %define cmake_build_dir build
 
 Name:             vacuum
-Version:          1.2.4
+Version:          1.2.5
 Release:          1%{dist}
 Summary:          Client application for the Jabber network
 Summary(ru):      Свободный jabber-клиент
 
 License:          GPLv3
 Group:            Applications/Internet
-URL:              http://code.google.com/p/vacuum-im/
-Source0:          https://googledrive.com/host/0B7A5K_290X8-NE5nLUx5Yl9BTkk/%{name}-%{version}.tar.xz
+URL:              https://github.com/Vacuum-IM
+Source0:          https://github.com/Vacuum-IM/vacuum-im/archive/1.2.5/%{name}-%{version}.tar.gz
 
+BuildRequires:    gcc-c++
 BuildRequires:    cmake
 BuildRequires:    libidn-devel
 BuildRequires:    libXScrnSaver-devel
@@ -46,7 +47,7 @@ The %{name}-devel package contains API documentation for developing %{name}.
 Пакет %{name}-devel содержит документацию и API для %{name}.
 
 %prep
-%setup -q -n %{name}-%{version}
+%setup -q -n %{name}-im-%{version}
 mkdir %{cmake_build_dir}
 pushd %{cmake_build_dir}
       %cmake .. -DINSTALL_LIB_DIR=%{_lib} -DCFLAGS="%{optflags}" -DCXXFLAGS="%{optflags}"
@@ -54,12 +55,12 @@ popd
 
 %build
 pushd %{cmake_build_dir}
-      make %{?_smp_mflags}
+      %make_build
 popd
 
 %install
 pushd %{cmake_build_dir}
-      make install DESTDIR=$RPM_BUILD_ROOT
+      %make_install
 popd
 
 #remove unversion doc
@@ -88,8 +89,8 @@ fi
 gtk-update-icon-cache /usr/share/icons/hicolor &>/dev/null || :
 
 %files
-%defattr(-, root, root, 0755)
-%doc COPYING CHANGELOG AUTHORS README TRANSLATORS
+%doc CHANGELOG AUTHORS README TRANSLATORS
+%license COPYING
 %{_bindir}/%{name}
 %{_libdir}/%{name}/plugins
 %{_libdir}/libvacuumutils.so.*
@@ -99,11 +100,13 @@ gtk-update-icon-cache /usr/share/icons/hicolor &>/dev/null || :
 %{_datadir}/icons/hicolor/*/apps/*.png
 
 %files devel
-%defattr(-, root, root, 0755)
 %{_includedir}/%{name}
 %{_libdir}/libvacuumutils.so
 
 %changelog
+* Tue Jul 14 2015 Vasiliy N. Glazov <vascom2@gmail.com> - 1.2.5-1
+- 1.2.5 stable release.
+
 * Sun Mar 30 2014 Alexey N. Ivanov <alexey.ivanes@gmail.com> - 1.2.4-1
 - 1.2.4 stable release.
 
@@ -122,10 +125,10 @@ gtk-update-icon-cache /usr/share/icons/hicolor &>/dev/null || :
 * Wed Aug 01 2012 Alexey N. Ivanov <alexey.ivanes@gmail.com> - 1.2.0-1.R
 - 1.2.0 stable release.
 
-* Tue Dec 28 2011 Alexey N. Ivanov <alexey.ivanes@gmail.com> - 1.1.1-5.R
+* Wed Dec 28 2011 Alexey N. Ivanov <alexey.ivanes@gmail.com> - 1.1.1-5.R
 - Minor version update.
 
-* Tue Dec 7 2011 Alexey N. Ivanov <alexey.ivanes@gmail.com> - 1.1.1-4.R
+* Wed Dec 7 2011 Alexey N. Ivanov <alexey.ivanes@gmail.com> - 1.1.1-4.R
 - Fixed work.
 
 * Tue Nov 22 2011 Vasiliy N. Glazov <vascom2@gmail.com> - 1.1.1-3.R
